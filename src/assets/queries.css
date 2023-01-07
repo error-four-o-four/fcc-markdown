@@ -1,0 +1,15 @@
+@custom-media --light (prefers-color-scheme: light);
+
+@custom-media --reduced-motion (prefers-reduced-motion: reduce);
+@custom-media --no-preference-motion (prefers-reduced-motion: no-preference);
+
+@custom-media --mq-max-480 screen and (max-width: 480px);
+@custom-media --mq-min-480 screen and (min-width: 480px);
+
+@custom-media --mq-max-640 screen and (max-width: 640px);
+@custom-media --mq-min-640 screen and (min-width: 640px);
+
+@custom-media --mq-max-960 screen and (max-width: 960px);
+@custom-media --mq-min-960 screen and (min-width: 960px);
+
+@custom-media --mq-min-1280 screen and (min-width: 1280px);

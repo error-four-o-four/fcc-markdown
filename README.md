@@ -1,7 +1,7 @@
 # fcc-project - markdown previwer
 
-[freeCodeCamp](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-markdown-previewer)
-[Example Repo](https://github.com/freeCodeCamp/demo-projects/tree/main/apps/markdown-previewer)
+[freeCodeCamp](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-markdown-previewer)\
+[Example Repo](https://github.com/freeCodeCamp/demo-projects/tree/main/apps/markdown-previewer)\
 [Example Demo](https://markdown-previewer.freecodecamp.rocks/)
 
 ## User Stories

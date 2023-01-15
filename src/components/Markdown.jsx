@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState, lazy } from 'react';
+import { createElement } from 'react';
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -6,17 +6,11 @@ import remarkGfm from 'remark-gfm';
 import { createStarryNight, common } from '@wooorm/starry-night';
 import { toH } from 'hast-to-hyperscript';
 
-let starryNight;
-let languages;
-
-async function fetchStarryNight(resolve) {
-  starryNight = await createStarryNight(common);
-  languages = starryNight.scopes().map((item) => {
-    const [, ...tags] = item.split('.');
-    return tags.join('.');
-  });
-  resolve();
-}
+const starryNight = await createStarryNight(common);
+const languages = starryNight.scopes().map((item) => {
+  const [, ...tags] = item.split('.');
+  return tags.join('.');
+});
 
 function CodeBlock({ className, children }) {
   const match = /language-(\w+)/.exec(className || '');
@@ -31,16 +25,6 @@ function CodeBlock({ className, children }) {
 }
 
 export default function Markdown({ content }) {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    fetchStarryNight(() => setLoaded(true));
-  }, []);
-
-  if (!loaded) {
-    return <>Loading ...</>;
-  }
-
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}

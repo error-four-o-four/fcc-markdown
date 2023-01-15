@@ -1,10 +1,19 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  lazy,
+  Suspense,
+} from 'react';
 
 import { LAYOUT, LayoutContext } from '../context/LayoutContext.jsx';
 import { TabsContext } from '../context/TabsContext.jsx';
 
 import initialTextareaContent from '../assets/initialTextareaContent.js';
-import Markdown from './Markdown.jsx';
+
+const LazyMarkdown = lazy(() => import('./Markdown.jsx'));
 
 function Tabs({ children }) {
   const layoutState = useContext(LayoutContext);
@@ -75,7 +84,9 @@ export default function Main() {
           onChange={handleTextarea}
         />
         <div id="preview" className="markdown-body">
-          <Markdown content={markdown} />
+          <Suspense fallback={<div>Loading ... </div>}>
+            <LazyMarkdown content={markdown} />
+          </Suspense>
         </div>
       </Tabs>
     </main>

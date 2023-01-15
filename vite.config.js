@@ -7,6 +7,7 @@ import postcssCustomMedia from 'postcss-custom-media';
 // https://vitejs.dev/config/
 // https://vitejs.dev/guide/build.html#public-base-path
 // https://www.youtube.com/watch?v=Sgcfiow4fVQ
+// https://sambitsahoo.com/blog/vite-code-splitting-that-works.html
 
 export default (args) => {
   const isProduction = args.mode === 'production';
@@ -14,15 +15,14 @@ export default (args) => {
     ? '[hash:base64:3]'
     : '[local]_[hash:base64:3]';
 
-  // console.log(`Running ${args.mode} mode ...\n`);
-  // console.log(args);
+  console.log(args, `Running ${args.mode} mode ...\n`);
 
-  return defineConfig({
+  const config = {
     base: './',
-    plugins: [react()],
     build: {
       target: 'esnext',
     },
+    plugins: [react()],
     css: {
       modules: {
         localsConvention: 'camelCase',
@@ -32,5 +32,24 @@ export default (args) => {
         plugins: [postcssCustomMedia(), postcssNesting()],
       },
     },
-  });
+  };
+
+  if (isProduction) {
+    config.build = {
+      ...config.build,
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: [
+              'node_modules/react/index.js',
+              'node_modules/react-dom/index.js',
+            ],
+          },
+        },
+      },
+    };
+  }
+
+  return defineConfig(config);
 };

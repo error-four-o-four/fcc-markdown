@@ -21,27 +21,17 @@ const initialColorScheme = !darkColorSchemeQuery.matches
   ? THEME.LIGHT
   : THEME.DARK;
 
-// const cssFiles = {
-//   [THEME.DARK]: `theme.${THEME.DARK}.css`,
-//   [THEME.LIGHT]: `theme.${THEME.LIGHT}.css`,
-// };
-
 // load css dynamically
 const cssLoaded = {
   [THEME.DARK]: false,
   [THEME.LIGHT]: false,
 };
 
-// const assetsPath = '../assets/';
-
-const fetchBaseCss = async () => {
-  const styleElement = document.createElement('style');
-  document.head.appendChild(styleElement);
-
+const fetchMarkdownCss = async () => {
   import('github-markdown-css');
 };
 
-const fetchCss = async (theme) => {
+const fetchThemeCss = async (theme) => {
   switch (theme) {
     case 'light':
       import('../assets/theme.light.css');
@@ -51,13 +41,6 @@ const fetchCss = async (theme) => {
       import('../assets/theme.dark.css');
       break;
   }
-
-  // const styleElement = document.createElement('style');
-  // document.head.appendChild(styleElement);
-
-  // const path = assetsPath + cssFiles[theme];
-  // const { default: props } = await import(/* @vite-ignore */ path);
-  // styleElement.innerHTML += props;
 
   cssLoaded[theme] = true;
 };
@@ -99,7 +82,7 @@ export function ThemeProvider({ children }) {
       darkColorSchemeQuery.addEventListener('change', handleColorSchemeChange);
     }
 
-    fetchBaseCss();
+    fetchMarkdownCss();
 
     return () => {
       darkColorSchemeQuery.removeEventListener(
@@ -111,7 +94,7 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     if (!cssLoaded.dark || !cssLoaded.light) {
-      fetchCss(current);
+      fetchThemeCss(current);
     }
   });
 

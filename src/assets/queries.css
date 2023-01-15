@@ -3,6 +3,9 @@
 @custom-media --reduced-motion (prefers-reduced-motion: reduce);
 @custom-media --no-preference-motion (prefers-reduced-motion: no-preference);
 
+@custom-media --mq-max-360 screen and (max-width: 360px);
+@custom-media --mq-min-360 screen and (min-width: 360px);
+
 @custom-media --mq-max-480 screen and (max-width: 480px);
 @custom-media --mq-min-480 screen and (min-width: 480px);
 

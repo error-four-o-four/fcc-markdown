@@ -20,6 +20,9 @@ export default (args) => {
   return defineConfig({
     base: './',
     plugins: [react()],
+    build: {
+      target: 'esnext',
+    },
     css: {
       modules: {
         localsConvention: 'camelCase',

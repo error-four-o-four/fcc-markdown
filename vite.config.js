@@ -15,7 +15,7 @@ export default (args) => {
     ? '[hash:base64:3]'
     : '[local]_[hash:base64:3]';
 
-  console.log(args, `Running ${args.mode} mode ...\n`);
+  console.log(args, `\nRunning ${args.mode} mode ...\n`);
 
   const config = {
     base: './',
